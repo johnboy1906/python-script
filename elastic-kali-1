@@ -16,7 +16,7 @@ if __name__ == "__main__":
     doc_type = "my_doc"
     id = 1
     data = {
-        "user": "john_doe",
+        "user": "john_newall",
         "post_date": "2024-06-10",
         "message": "Elasticsearch indexing script on Kali Linux"
     }
