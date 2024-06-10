@@ -1,0 +1,23 @@
+from elasticsearch import Elasticsearch
+
+# Connect to Elasticsearch
+es = Elasticsearch(['http://localhost:9200'])
+
+def index_data(index_name, doc_type, id, data):
+    try:
+        # Index the data
+        res = es.index(index=index_name, doc_type=doc_type, id=id, body=data)
+        print(f"Indexed data with ID {res['_id']} into index '{index_name}'")
+    except Exception as e:
+        print(f"Error indexing data: {e}")
+
+if __name__ == "__main__":
+    index_name = "my_index"
+    doc_type = "my_doc"
+    id = 1
+    data = {
+        "user": "john_doe",
+        "post_date": "2024-06-10",
+        "message": "Elasticsearch indexing script on Kali Linux"
+    }
+    index_data(index_name, doc_type, id, data)
