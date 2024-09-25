@@ -1,0 +1,44 @@
+import requests
+
+# Configuration
+JUMPCLOUD_API_KEY = 'API KEY'
+BITDEFENDER_API_URL = 'https://api.bitdefender.com/'  # Bitdefender API URL
+HEADERS = {
+    'x-api-key': JUMPCLOUD_API_KEY,
+    'Content-Type': 'application/json',
+}
+
+def get_jumpcloud_devices():
+    """Retrieve a list of devices from JumpCloud."""
+    url = 'https://console.jumpcloud.com/api/systemusers'
+    response = requests.get(url, headers=HEADERS)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Error retrieving devices: {response.status_code} {response.text}")
+        return []
+
+def check_bitdefender_installed(device_id):
+    """Check if Bitdefender is installed on a specific device."""
+    # This function will need to call the Bitdefender API.
+    # Here, we assume Bitdefender has an endpoint to check installation status.
+    url = f"{BITDEFENDER_API_URL}/devices/{device_id}/status"  # Placeholder URL
+    response = requests.get(url)  # Add proper headers if needed
+
+    if response.status_code == 200:
+        return response.json().get('is_installed', False)
+    else:
+        print(f"Error checking Bitdefender status for device {device_id}: {response.status_code} {response.text}")
+        return False
+
+def main():
+    devices = get_jumpcloud_devices()
+    for device in devices:
+        device_id = device.get('id')
+        if device_id:
+            is_installed = check_bitdefender_installed(device_id)
+            print(f"Device ID: {device_id}, Bitdefender Installed: {is_installed}")
+
+if __name__ == "__main__":
+    main()
