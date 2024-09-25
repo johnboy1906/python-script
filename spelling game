@@ -1,0 +1,25 @@
+import random
+
+def spelling_game():
+    words = ["python", "computer", "programming", "challenge", "spelling", "education", "development", "algorithm"]
+    score = 0
+    rounds = 5
+
+    print("Welcome to the Spelling Game!")
+    print(f"You will have {rounds} rounds to spell the words correctly.")
+
+    for _ in range(rounds):
+        word_to_spell = random.choice(words)
+        print(f"\nSpell the word: {word_to_spell}")
+        answer = input("Your answer: ").lower()
+
+        if answer == word_to_spell:
+            print("Correct! Well done.")
+            score += 1
+        else:
+            print(f"Wrong! The correct spelling is: {word_to_spell}")
+
+    print(f"\nGame Over! Your total score: {score}/{rounds}")
+
+if __name__ == "__main__":
+    spelling_game()
